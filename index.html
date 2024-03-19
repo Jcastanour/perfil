@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Plantillas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+        }
+        input[type="text"] {
+            padding: 8px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="perfil" placeholder="Perfil">
+        <button onclick="generarPlantilla()">Generar Plantilla</button>
+    </div>
+
+    <script>
+        function generarPlantilla() {
+            navigator.clipboard.readText()
+                .then(text => {
+                    const contenido = text.trim().split('\t');
+                    if (contenido.length !== 3) {
+                        alert("El contenido copiado no está en el formato esperado (deben ser tres columnas separadas por tabuladores).");
+                        return;
+                    }
+
+                    const fecha = new Date().toLocaleDateString();
+                    const [cuenta, correo, contrasena] = contenido;
+                    const perfil = document.getElementById('perfil').value.trim();
+                    const plantilla = `*${cuenta}*\n*Correo:* ${correo}\n*Contrasena:* ${contrasena}\n\n*Perfil:* ${perfil}\n*Fecha:* ${fecha}`;
+                    
+                    navigator.clipboard.writeText(plantilla)
+                        .then(() => alert("La plantilla ha sido generada y copiada al portapapeles."))
+                        .catch(err => console.error('Error al copiar al portapapeles:', err));
+                })
+                .catch(err => console.error('Error al leer el portapapeles:', err));
+        }
+    </script>
+</body>
+</html>
