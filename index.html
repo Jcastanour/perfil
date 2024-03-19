@@ -45,10 +45,13 @@
                         return;
                     }
 
+                    
                     const fecha = new Date().toLocaleDateString();
+                    const partesFecha = fecha.split('/');
+                    const fechaReorganizada = `${partesFecha[1]}/${partesFecha[0]}/${partesFecha[2]}`;
                     const [cuenta, correo, contrasena] = contenido;
                     const perfil = document.getElementById('perfil').value.trim();
-                    const plantilla = `*${cuenta}*\n*Correo:* ${correo}\n*Contrasena:* ${contrasena}\n\n*Perfil:* ${perfil}\n*Fecha:* ${fecha}`;
+                    const plantilla = `*${cuenta}*\n*Correo:* ${correo}\n*Contrasena:* ${contrasena}\n\n*Perfil:* ${perfil}\n*Fecha:* ${fechaReorganizada}`;
                     
                     navigator.clipboard.writeText(plantilla)
                         .then(() => alert("La plantilla ha sido generada y copiada al portapapeles."))
