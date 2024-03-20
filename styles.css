@@ -1,22 +1,107 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
+html{
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body{
+    display: grid;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    background: #efefef;
+    
 }
+
+
+.wrapper{
+    width: 500px;
+    height: 300px;;
+    transition: box-shadow 0.3s ease;
+    text-align: center;
+    justify-content: center;
+    /* margin: 0px auto; */
+    align-items: center;
+    background: #fff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    overflow-x: auto; /* Habilitar el desplazamiento horizontal si el contenido se desborda */
+    overflow-y: auto;
+}
+
+.wrapper:hover{
+box-shadow: 0px 25px 35px rgba(0, 0, 0, 0.3);
+}
+
+button{
+    transition: transform 0.3s ease;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    padding: 8px 0;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    height: 50px;
+    width: 40%;
+    background: rgb(63, 76, 255);
+    color: #fff;
+    cursor: pointer;
+    
+}
+
+button:hover {
+background: rgb(54, 68, 255);
+transform: scale(1.02);
+}
+
 .container {
     text-align: center;
+    color: #000000;
 }
+
 input[type="text"] {
     padding: 8px;
     font-size: 16px;
     margin-bottom: 10px;
+    text-align: center;
 }
 button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+}
+
+.mensaje-container {
+    background-color: #DCF8C6; /* Color de fondo del mensaje */
+    border: 1px solid #ddd; /* Borde */
+    border-radius: 5px; /* Borde redondeado */
+    padding: 10px; /* Espaciado interno */
+    margin: 0 auto; /* Centrar horizontalmente */
+    max-width: 80%; /* Anchura máxima */
+    text-align: left; /* Alinear texto a la izquierda */
+    
+}
+
+.bold {
+    font-weight: bold; /* Hacer el texto en negrita */
+}
+
+.lista {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lista div {
+    display: table-cell;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+}
+
+.lista div:first-child {
+    border-left: 0;
+}
+
+.lista div:last-child {
+    border-right: 0;
 }
