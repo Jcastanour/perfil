@@ -31,6 +31,14 @@ function actualizarContenidoCopiado() {
         .catch(err => console.error('Error al leer el portapapeles:', err));
 }
 
+function obtenerFechaFormateada() {
+    const fecha = new Date();
+    const dia = fecha.getDate().toString().padStart(2, '0'); // Agrega un cero delante si es necesario
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Agrega un cero delante si es necesario
+    const anio = fecha.getFullYear();
+    return `${dia}/${mes}/${anio}`;
+}
+
 function generarPlantilla() {
     navigator.clipboard.readText()
         .then(text => {
@@ -43,7 +51,7 @@ function generarPlantilla() {
                 return;
             }
             
-            const fecha = moment(new Date()).format("DD/MM/YYYY")
+            const fecha = obtenerFechaFormateada();
             const partesFecha = fecha.split('/');
             const fechaReorganizada = `${partesFecha[1]}/${partesFecha[0]}/${partesFecha[2]}`;
             const [cuenta, correo, contrasena] = contenido;
