@@ -43,7 +43,7 @@ function generarPlantilla() {
                 return;
             }
             
-            const fecha = moment().format('DD/MM/YYYY');
+            const fecha = moment(new Date()).format("DD/MM/YYYY")
             const partesFecha = fecha.split('/');
             const fechaReorganizada = `${partesFecha[1]}/${partesFecha[0]}/${partesFecha[2]}`;
             const [cuenta, correo, contrasena] = contenido;
