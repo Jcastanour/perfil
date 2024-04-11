@@ -67,3 +67,9 @@ function generarPlantilla() {
         })
         .catch(err => console.error('Error al leer el portapapeles:', err));
 }
+
+document.getElementById("perfil").addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      generarPlantilla();
+    }
+  });
