@@ -37,6 +37,8 @@ function obtenerFechaFormateada() {
 }
 let contenidoGenerado;
 let plantillaG;
+let fechaG;
+let PerfilG;
 function generarPlantilla() {
     navigator.clipboard.readText()
         .then(text => {
@@ -53,7 +55,9 @@ function generarPlantilla() {
             contenidoGenerado = contenido;
             const perfil = document.getElementById('perfil').value.trim();
             const plantilla = `*${cuenta}*\n*Correo:* ${correo}\n*Contrasena:* ${contrasena}\n\n*Perfil:* ${perfil}\n*Fecha:* ${fecha}`;
+            PerfilG = perfil;
             plantillaG = plantilla;
+            fechaG = fecha;
             navigator.clipboard.writeText(plantilla)
                 .then(() => {
                     // alert("La plantilla ha sido generada y copiada al portapapeles.");
@@ -108,26 +112,9 @@ function copiarexcel() {
         alert("Primero debes generar la plantilla.");
         return;
     }
-
+    const [fecha] = fechaG
     const [cuenta, correo] = contenidoGenerado;
-    const texto = `${cuenta}\t${correo}`;
-    navigator.clipboard.writeText(texto)
-        .then(() => {
-            //alert("Texto copiado al portapapeles: " + texto);
-        })
-        .catch(err => {
-            alert("Error al copiar al portapapeles: " + err.message);
-        });
-}
-
-function abrircuenta() {
-    if (!contenidoGenerado) {
-        alert("Primero debes generar la plantilla.");
-        return;
-    }
-
-    const [cuenta, correo] = contenidoGenerado;
-    const texto = `${cuenta}\t${correo}`;
+    const texto = `${PerfilG}\t${cuenta}\t${fechaG}\t${correo}`;
     navigator.clipboard.writeText(texto)
         .then(() => {
             //alert("Texto copiado al portapapeles: " + texto);
@@ -142,6 +129,8 @@ function abrirCuentaDesdeBoton() {
         alert("Primero debes generar la plantilla.");
         return;
     }
+
+    copiarcuenta()
 
     const [tipoCuenta] = contenidoGenerado;
     let url;
