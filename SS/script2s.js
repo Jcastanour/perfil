@@ -11,6 +11,9 @@ function actualizarContenidoCopiado() {
                 const contenido = text.trim().split('\t');
                 contenidoVisualizado = `<p>${contenido.length} celdas copiadas:</p>`;
                 contenidoVisualizado += '<div class="lista">';
+                if (contenido.length === 2){
+                    contenido.unshift("NETFLIX")
+                }
                 contenido.forEach(item => {
                     contenidoVisualizado += `<div>${item}</div>`;
                 });
@@ -35,13 +38,17 @@ function obtenerFechaFormateada() {
     const anio = fecha.getFullYear();
     return `${dia}/${mes}/${anio}`;
 }
+
 let contenidoGenerado;
-let plantillaG;
+
 function generarPlantilla() {
     navigator.clipboard.readText()
         .then(text => {
             const contenido = text.trim().split('\t');
-            if (contenido.length !== 3) {
+            if (contenido.length == 2) {
+                contenido.unshift("NETFLIX");
+            }
+            else if (contenido.length !== 3) {
                 alert("El contenido copiado no está en el formato esperado (deben ser tres columnas separadas por tabuladores).");
                 return;
             }
@@ -53,7 +60,7 @@ function generarPlantilla() {
             contenidoGenerado = contenido;
             const perfil = document.getElementById('perfil').value.trim();
             const plantilla = `*${cuenta}*\n*Correo:* ${correo}\n*Contrasena:* ${contrasena}\n\n*Perfil:* ${perfil}\n*Fecha:* ${fecha}`;
-            plantillaG = plantilla;
+
             navigator.clipboard.writeText(plantilla)
                 .then(() => {
                     // alert("La plantilla ha sido generada y copiada al portapapeles.");
@@ -70,16 +77,18 @@ document.getElementById("perfil").addEventListener("keypress", function (event) 
     }
   });
 
-function plantilladenuevo() {
-    if (!plantillaG) {
-        //alert("Primero debes generar la plantilla.");
+
+function copiarexcel() {
+    if (!contenidoGenerado) {
+        alert("Primero debes generar la plantilla.");
         return;
     }
 
-    const texto = plantillaG;
+    const [cuenta, correo] = contenidoGenerado;
+    const texto = `${cuenta}\t${correo}`;
     navigator.clipboard.writeText(texto)
         .then(() => {
-            //alert("Texto copiado al portapapeles: " + texto);
+            alert("Texto copiado al portapapeles: " + texto);
         })
         .catch(err => {
             alert("Error al copiar al portapapeles: " + err.message);
@@ -96,89 +105,9 @@ function copiarcuenta() {
     const texto = `${correo}\t${contrasena}`;
     navigator.clipboard.writeText(texto)
         .then(() => {
-            //alert("Texto copiado al portapapeles: " + texto);
+            alert("Texto copiado al portapapeles: " + texto);
         })
         .catch(err => {
             alert("Error al copiar al portapapeles: " + err.message);
         });
-}
-
-function copiarexcel() {
-    if (!contenidoGenerado) {
-        alert("Primero debes generar la plantilla.");
-        return;
-    }
-
-    const [cuenta, correo] = contenidoGenerado;
-    const texto = `${cuenta}\t${correo}`;
-    navigator.clipboard.writeText(texto)
-        .then(() => {
-            //alert("Texto copiado al portapapeles: " + texto);
-        })
-        .catch(err => {
-            alert("Error al copiar al portapapeles: " + err.message);
-        });
-}
-
-function abrircuenta() {
-    if (!contenidoGenerado) {
-        alert("Primero debes generar la plantilla.");
-        return;
-    }
-
-    const [cuenta, correo] = contenidoGenerado;
-    const texto = `${cuenta}\t${correo}`;
-    navigator.clipboard.writeText(texto)
-        .then(() => {
-            //alert("Texto copiado al portapapeles: " + texto);
-        })
-        .catch(err => {
-            alert("Error al copiar al portapapeles: " + err.message);
-        });
-}
-
-function abrirCuentaDesdeBoton() {
-    if (!contenidoGenerado) {
-        alert("Primero debes generar la plantilla.");
-        return;
-    }
-
-    const [tipoCuenta] = contenidoGenerado;
-    let url;
-    switch (tipoCuenta.toLowerCase()) {
-        case 'max':
-            url = 'https://max.com';
-            break;
-        case 'amazon':
-            url = 'https://primevideo.com';
-            break;
-        case 'crunchyroll':
-            url = 'https://crunchyroll.com';
-            break;
-        case 'vix':
-            url = 'https://vix.com';
-            break;
-        case 'disney':
-            url = 'https://disneyplus.com';
-            break;
-        case 'star':
-            url = 'https://starplus.com';
-            break;
-        case 'paramount':
-            url = 'https://paramount.com';
-            break;
-        case 'netflix':
-            url = 'https://netflix.com';
-            break;
-        case 'netflix tv':
-            url = 'https://netflix.com';
-            break;
-        case 'netflix cel/pc':
-            url = 'https://netflix.com';
-            break;
-        default:
-            alert("Tipo de cuenta no reconocido");
-            return;
-    }
-    window.open(url, '_blank'); // Abre la URL en una nueva pestaña
 }
