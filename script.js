@@ -147,7 +147,7 @@ function abrirCuentaDesdeBoton() {
     let url;
     switch (tipoCuenta.toLowerCase()) {
         case 'max':
-            url = 'https://max.com';
+            url = 'https://play.max.com';
             break;
         case 'amazon':
             url = 'https://primevideo.com';
