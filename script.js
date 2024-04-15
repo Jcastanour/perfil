@@ -114,7 +114,7 @@ function copiarexcel() {
     }
     const [fecha] = fechaG
     const [cuenta, correo] = contenidoGenerado;
-    const texto = `${PerfilG}\t${cuenta}\t${fechaG}\t${correo}`;
+    const texto = `${PerfilG}\t\t${cuenta}\t${fechaG}\t${correo}`;
     navigator.clipboard.writeText(texto)
         .then(() => {
             //alert("Texto copiado al portapapeles: " + texto);
