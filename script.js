@@ -8,13 +8,23 @@ function actualizarContenidoCopiado() {
         .then(text => {
             let contenidoVisualizado = '';
             if (text.includes('\t')) { // Si el texto contiene tabuladores, mostrar como lista
+                const filas = text.trim().split('\n');
                 const contenido = text.trim().split('\t');
-                contenidoVisualizado = `<p>${contenido.length} celdas copiadas:</p>`;
-                contenidoVisualizado += '<div class="lista">';
-                contenido.forEach(item => {
-                    contenidoVisualizado += `<div>${item}</div>`;
-                });
-                contenidoVisualizado += '</div>';
+                if (contenido.length <= 3) { // Si hay 3 celdas, mostrarlas como lista
+                    contenidoVisualizado = '<p>Contenido copiado:</p>';
+                    contenidoVisualizado += '<div class="lista">';
+                    contenido.forEach(item => {
+                        contenidoVisualizado += `<div>${item}</div>`;
+                    });
+                    contenidoVisualizado += '</div>';
+                } else if ((contenido.length > 3 & contenido.length < 6)){
+                    contenidoVisualizado = `<p>${contenido.length} celda(s) copiada(s).</p>`;    
+                }else if (contenido.length >= 6) { // Si hay 6 o más celdas
+                    if ((contenido.length + (filas.length-1))% 6 === 0) { // Si el número de celdas es múltiplo de 6
+                        contenidoVisualizado = `<p>${filas.length} fila(s) copiada(s).</p>`;
+                    } else { // Si el número de celdas no es múltiplo de 6
+                        contenidoVisualizado = `<p>Atención: El número de celdas copiadas (${contenido.length}) no es un múltiplo de 6, por lo tanto, no se puede formar un número entero de filas.</p>`;
+                    }}
             } else if (text.includes('*')) { // Si el texto contiene asteriscos, aplicar formato especial
                 const contenido = text.trim().split('\n');
                 contenido.forEach(linea => {
@@ -170,4 +180,93 @@ function abrirCuentaDesdeBoton() {
             return;
     }
     window.open(url, '_blank'); // Abre la URL en una nueva pestaña
+}
+
+function recordarDatos() {
+
+    // Obtener el texto del portapapeles
+        navigator.clipboard.readText().then(text => {
+        // Dividir la cadena en elementos separados por tabuladores
+        const contenido = text.trim().split('\t');
+        const filas = text.trim().split('\n'); 
+        if ((contenido.length !== 6) & (contenido.length + (filas.length-1)) % 6 !== 0){
+                alert("El contenido copiado no está en el formato esperado (deben ser filas de 6 celdas).");
+                return;
+        } 
+        const datos = text.trim().split('\t');   
+        // Obtener los valores relevantes
+        const perfil = datos[2];
+        const nombre = datos[0];
+        const correo = datos[4];
+        const contraseña = datos[5];
+
+        // Formatear la salida
+        const salida = `*${perfil.toUpperCase()} ${nombre.toUpperCase()}*\n` +
+                    `*Correo:* ${correo}\n` +
+                    `*Contraseña:* ${contraseña}`;
+
+        // Colocar la salida formateada en el portapapeles
+        return navigator.clipboard.writeText(salida);
+    }).then(() => {
+        console.log('La salida formateada se ha copiado correctamente al portapapeles.');
+    }).catch(err => {
+        console.error('Error:', err);
+    });
+}
+
+function cambioContra() {
+    // Obtener la fecha actual en formato YYYY-MM-DD
+    const fechaActual = obtenerFechaFormateada();
+
+    // Obtener el texto del portapapeles
+    navigator.clipboard.readText().then(text => {
+        // Dividir el texto del portapapeles en filas
+        const contenido = text.trim().split('\t');
+        const filas = text.trim().split('\n'); 
+        if ((contenido.length !== 6) & (contenido.length + (filas.length-1)) % 6 !== 0){
+                alert("El contenido copiado no está en el formato esperado (deben ser filas de 6 celdas).");
+                return;
+        } 
+
+        // Array para almacenar los enlaces de WhatsApp con el perfil y el nombre
+        const enlacesConPerfil = [];
+
+        // Iterar sobre cada fila y generar un enlace de WhatsApp para cada una
+        for (let i = 0; i < filas.length; i++) {
+            const fila = filas[i].split('\t'); // Dividir la fila en elementos separados por tabuladores
+
+            // Obtener los valores relevantes
+            const perfil = fila[2];
+            const nombre = fila[0];
+            const cuenta = fila[2];
+            const correo = fila[4];
+            const contraseña = fila[5];
+            const telefono = fila[1].replace(/\s+/g, ''); // Eliminar espacios en blanco del número de teléfono
+            const telefonoSinPlus = telefono.replace(/^\+/, ''); // Eliminar el símbolo "+" del número de teléfono si está presente
+
+            // Formatear el mensaje de cambio de contraseña con el perfil y el nombre en negrita
+            const mensaje = `Hola,te informo que la contraseña de ${cuenta} cambió.\n\n` +
+                            `*${perfil.toUpperCase()} ${nombre.toUpperCase()}*\n` +
+                            `*Correo:* ${correo}\n` +
+                            `*Contraseña:* ${contraseña}`;
+
+            // Crear el enlace de WhatsApp sin el símbolo "+"
+            const enlaceWhatsApp = `https://wa.me/${telefonoSinPlus}?text=${encodeURIComponent(mensaje)}`;
+
+            // Almacenar el enlace junto con el perfil y el nombre
+            enlacesConPerfil.push(`*Perfil: ${perfil.toUpperCase()} ${nombre.toUpperCase()}*\n${enlaceWhatsApp}`);
+        }
+
+        // Concatenar el mensaje de cambio de contraseña al principio de la cadena de enlaces
+        const mensajeCambio = `*Cambio contraseña - ${filas[0].split('\t')[2]}*\n` +
+                            `${filas[0].split('\t')[4]}\n` + `*Fecha de cambio:* ${fechaActual}\n\n`;
+        const enlacesConPerfilTexto = mensajeCambio + enlacesConPerfil.join('\n\n');
+        
+        // Copiar los enlaces al portapapeles
+        return navigator.clipboard.writeText(enlacesConPerfilTexto);
+    }).then(() => {
+        console.log('Los enlaces de WhatsApp con el mensaje de cambio de contraseña se han copiado correctamente al portapapeles.');
+    }).catch(err => {
+        console.error('Error:', err);
+    });
 }

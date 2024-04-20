@@ -13,10 +13,9 @@ body{
     
 }
 
-
 .wrapper{
     width: 500px;
-    height: 300px;;
+    height: 400px;;
     transition: box-shadow 0.3s ease;
     text-align: center;
     justify-content: center;
