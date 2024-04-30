@@ -124,7 +124,7 @@ function copiarexcel() {
     }
     const [fecha] = fechaG
     const [cuenta, correo] = contenidoGenerado;
-    const texto = `${PerfilG}\t\t${cuenta}\t${fechaG}\t${correo}`;
+    const texto = `${PerfilG}\t\t${fechaG}\t${cuenta}\t${correo}`;
     navigator.clipboard.writeText(texto)
         .then(() => {
             //alert("Texto copiado al portapapeles: " + texto);
@@ -183,32 +183,99 @@ function abrirCuentaDesdeBoton() {
 }
 
 function recordarDatos() {
-
     // Obtener el texto del portapapeles
-        navigator.clipboard.readText().then(text => {
+    navigator.clipboard.readText().then(text => {
         // Dividir la cadena en elementos separados por tabuladores
+        const filas = text.trim().split('\n');
+        
+        // Verificar el formato esperado
         const contenido = text.trim().split('\t');
-        const filas = text.trim().split('\n'); 
-        if ((contenido.length !== 6) & (contenido.length + (filas.length-1)) % 6 !== 0){
-                alert("El contenido copiado no está en el formato esperado (deben ser filas de 6 celdas).");
-                return;
-        } 
-        const datos = text.trim().split('\t');   
-        // Obtener los valores relevantes
-        const perfil = datos[2];
-        const nombre = datos[0];
-        const correo = datos[4];
-        const contraseña = datos[5];
+        if (contenido.length !== 6 && (contenido.length + (filas.length - 1)) % 6 !== 0) {
+            alert("El contenido copiado no está en el formato esperado (deben ser filas de 6 celdas).");
+            return;
+        }
 
-        // Formatear la salida
-        const salida = `*${perfil.toUpperCase()} ${nombre.toUpperCase()}*\n` +
-                    `*Correo:* ${correo}\n` +
-                    `*Contraseña:* ${contraseña}`;
+        // Procesar cada fila
+        const salidaFormateada = filas.map(fila => {
+            // Dividir la fila en elementos separados por tabuladores
+            const datos = fila.split('\t');
+            
+            // Obtener los valores relevantes
+            let perfil = datos[3];
+            const nombre = datos[0];
+            const correo = datos[4];
+            const contraseña = datos[5];
+
+            // Reemplazar "NETFLIX EXTRA" con "NETFLIX TELEVISOR"
+            if (perfil === "NETFLIX EXTRA") {
+                perfil = "NETFLIX TELEVISOR";
+            }
+
+            // Formatear la salida de esta fila
+            return `*${perfil.toUpperCase()} ${nombre.toUpperCase()}*\n` +
+                `*Correo:* ${correo}\n` +
+                `*Contraseña:* ${contraseña}`;
+        }).join('\n\n'); // Unir las salidas de cada fila separadas por dos saltos de línea
 
         // Colocar la salida formateada en el portapapeles
-        return navigator.clipboard.writeText(salida);
+        return navigator.clipboard.writeText(salidaFormateada);
     }).then(() => {
         console.log('La salida formateada se ha copiado correctamente al portapapeles.');
+    }).catch(err => {
+        console.error('Error:', err);
+    });
+}
+
+
+function obtenerNombresYSumaPrecios() {
+    navigator.clipboard.readText().then(text => {
+        // Dividir el texto en filas
+        const filas = text.trim().split('\n');
+        
+        // Inicializar variables para nombres y suma de precios
+        let nombres = [];
+        let sumaPrecios = 0;
+        
+        // Objeto para mantener un registro de las cuentas y su número total de repeticiones
+        const cuentasRepetidas = {};
+        
+        // Iterar sobre cada fila
+        filas.forEach(fila => {
+            // Dividir la fila en elementos separados por tabuladores
+            const datos = fila.split('\t');
+            
+            // Extraer el nombre y el precio de la fila actual
+            let nombreCuenta = datos[0];
+            const precio = parseFloat(datos[3].replace(/[^\d.]/g, ''));
+            
+            // Si el nombre es "NETFLIX EXTRA", reemplazarlo por "NETFLIX TELEVISOR"
+            if (nombreCuenta === "NETFLIX EXTRA") {
+                nombreCuenta = "NETFLIX TELEVISOR";
+            }
+            
+            // Agregar el nombre de la cuenta al registro y contar repeticiones
+            cuentasRepetidas[nombreCuenta] = (cuentasRepetidas[nombreCuenta] || 0) + 1;
+            
+            // Sumar el precio al total
+            sumaPrecios += precio;
+        });
+        
+        // Construir la lista de nombres concatenados con el número total de repeticiones
+        nombres = Object.entries(cuentasRepetidas).map(([nombre, repeticiones]) => {
+            return repeticiones > 1 ? `${repeticiones} ${nombre}` : nombre;
+        });
+        
+        // Concatenar los nombres de las cuentas separados por '+'
+        const nombresConcatenados = nombres.join(' + ');
+        
+        // Formatear la suma de precios en pesos colombianos
+        const sumaFormateada = sumaPrecios.toLocaleString('es-CO', {style: 'currency', currency: 'COP', minimumFractionDigits: 0, maximumFractionDigits: 0});
+        
+        // Formatear la salida con los nombres concatenados y la suma de precios
+        const salida = `${nombresConcatenados}\n${sumaFormateada}`;
+        
+        // Colocar la salida formateada en el portapapeles
+        return navigator.clipboard.writeText(salida);
     }).catch(err => {
         console.error('Error:', err);
     });
