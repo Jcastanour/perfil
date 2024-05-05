@@ -164,17 +164,20 @@ function abrirCuentaDesdeBoton() {
             url = 'https://starplus.com';
             break;
         case 'paramount':
-            url = 'https://paramount.com';
+            url = 'https://paramountplus.com';
             break;
-        case 'netflix':
+        case 'NETFLIX EXTRA':
             url = 'https://netflix.com';
             break;
-        case 'netflix tv':
+        case 'NETFLIX TELEVISOR':
             url = 'https://netflix.com';
             break;
-        case 'netflix cel/pc':
+        case 'NETFLIX CELULAR/PC':
             url = 'https://netflix.com';
             break;
+        case 'NETFLIX':
+            url = 'https://netflix.com';
+            break;    
         default:
             alert("Tipo de cuenta no reconocido");
             return;
@@ -303,17 +306,17 @@ function cambioContra() {
             const fila = filas[i].split('\t'); // Dividir la fila en elementos separados por tabuladores
 
             // Obtener los valores relevantes
-            const perfil = fila[2];
+            // const perfil = fila[2];
             const nombre = fila[0];
-            const cuenta = fila[2];
+            const cuenta = fila[3];
             const correo = fila[4];
             const contraseña = fila[5];
             const telefono = fila[1].replace(/\s+/g, ''); // Eliminar espacios en blanco del número de teléfono
             const telefonoSinPlus = telefono.replace(/^\+/, ''); // Eliminar el símbolo "+" del número de teléfono si está presente
 
             // Formatear el mensaje de cambio de contraseña con el perfil y el nombre en negrita
-            const mensaje = `Hola,te informo que la contraseña de ${cuenta} cambió.\n\n` +
-                            `*${perfil.toUpperCase()} ${nombre.toUpperCase()}*\n` +
+            const mensaje = `Hola, te informo que la contraseña de ${cuenta} cambió.\n\n` +
+                            `*${cuenta.toUpperCase()} ${nombre.toUpperCase()}*\n` +
                             `*Correo:* ${correo}\n` +
                             `*Contraseña:* ${contraseña}`;
 
