@@ -324,12 +324,12 @@ function cambioContra() {
             const enlaceWhatsApp = `https://wa.me/${telefonoSinPlus}?text=${encodeURIComponent(mensaje)}`;
 
             // Almacenar el enlace junto con el perfil y el nombre
-            enlacesConPerfil.push(`*Perfil: ${perfil.toUpperCase()} ${nombre.toUpperCase()}*\n${enlaceWhatsApp}`);
+            enlacesConPerfil.push(`*Perfil: ${cuenta.toUpperCase()} ${nombre.toUpperCase()}*\n${enlaceWhatsApp}`);
         }
 
         // Concatenar el mensaje de cambio de contraseña al principio de la cadena de enlaces
-        const mensajeCambio = `*Cambio contraseña - ${filas[0].split('\t')[2]}*\n` +
-                            `${filas[0].split('\t')[4]}\n` + `*Fecha de cambio:* ${fechaActual}\n\n`;
+        const mensajeCambio = `*Cambio contraseña - ${filas[0].split('\t')[3]}*\n` +
+                            `${filas[0].split('\t')[4]}\n` + `*Fecha del cambio:* ${fechaActual}\n\n`;
         const enlacesConPerfilTexto = mensajeCambio + enlacesConPerfil.join('\n\n');
         
         // Copiar los enlaces al portapapeles
