@@ -49,6 +49,10 @@ let contenidoGenerado;
 let plantillaG;
 let fechaG;
 let PerfilG;
+let whatasappG;
+let nump;
+let cuentaG;
+let correoG;
 function generarPlantilla() {
     navigator.clipboard.readText()
         .then(text => {
@@ -63,11 +67,15 @@ function generarPlantilla() {
             const fechaReorganizada = `${partesFecha[1]}/${partesFecha[0]}/${partesFecha[2]}`;
             const [cuenta, correo, contrasena] = contenido;
             contenidoGenerado = contenido;
+            nump = 0;
             const perfil = document.getElementById('perfil').value.trim();
             const plantilla = `*${cuenta}*\n*Correo:* ${correo}\n*Contrasena:* ${contrasena}\n\n*Perfil:* ${perfil}\n*Fecha:* ${fecha}`;
             PerfilG = perfil;
             plantillaG = plantilla;
             fechaG = fecha;
+            cuentaG = cuenta;
+            correoG = correo;
+            whatasappG = "";
             navigator.clipboard.writeText(plantilla)
                 .then(() => {
                     // alert("La plantilla ha sido generada y copiada al portapapeles.");
@@ -77,6 +85,70 @@ function generarPlantilla() {
         })
         .catch(err => console.error('Error al leer el portapapeles:', err));
 }
+
+function generarPlantilla2() {
+    navigator.clipboard.readText()
+        .then(text => {
+            const contenido = text.trim().split('\t');
+            if (contenido.length !== 5) {
+                alert("El contenido copiado no está en el formato esperado (deben ser cinco columnas separadas por tabuladores).");
+                return;
+            }
+            
+            const fecha = obtenerFechaFormateada();
+            const partesFecha = fecha.split('/');
+            const fechaReorganizada = `${partesFecha[1]}/${partesFecha[0]}/${partesFecha[2]}`;
+            const [perfil,whatasapp,cuenta, correo, contrasena] = contenido;
+            contenidoGenerado = contenido;
+            nump = 1;
+            const plantilla = `*${cuenta}*\n*Correo:* ${correo}\n*Contrasena:* ${contrasena}\n\n*Perfil:* ${perfil}\n*Fecha:* ${fecha}`;
+            PerfilG = perfil;
+            plantillaG = plantilla;
+            fechaG = fecha;
+            cuentaG = cuenta;
+            correoG = correo;
+            whatasappG = whatasapp;
+            navigator.clipboard.writeText(plantilla)
+                .then(() => {
+                    // alert("La plantilla ha sido generada y copiada al portapapeles.");
+                    document.getElementById('perfil').value = ""; }
+                    )
+                .catch(err => console.error('Error al copiar al portapapeles:', err));
+        })
+        .catch(err => console.error('Error al leer el portapapeles:', err));
+}
+
+function procesarFecha() {
+    // Obtener el nombre del perfil y la fecha
+    var perfil = PerfilG
+    var fecha = fechaG
+
+    // Separar el día de la fecha
+    var dia = parseInt(fecha.split('/')[0]);
+
+    // Crear el formato deseado para el día
+    var diaFormato = 'D';
+    if (dia < 4) {
+        diaFormato += '0' + dia;
+    } else {
+        diaFormato += dia;
+    }
+
+    // Crear el formato completo
+    var formatoCompleto = perfil + ' ' + diaFormato + "\t"+ whatasappG;
+
+    // Copiar al portapapeles
+    navigator.clipboard.writeText(formatoCompleto)
+        .then(function() {
+            console.log('Texto copiado al portapapeles: ' + formatoCompleto);
+            // Abrir la ventana de Google Contacts
+            window.open('https://contacts.google.com/new', '_blank');
+        })
+        .catch(function(err) {
+            console.error('Error al copiar al portapapeles: ', err);
+        });
+}
+
 
 document.getElementById("perfil").addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
@@ -122,9 +194,26 @@ function copiarexcel() {
         alert("Primero debes generar la plantilla.");
         return;
     }
-    const [fecha] = fechaG
-    const [cuenta, correo] = contenidoGenerado;
-    const texto = `${PerfilG}\t\t${fechaG}\t${cuenta}\t${correo}`;
+
+    let precioG;
+    
+    if (cuentaG === "NETFLIX TELEVISOR") {
+        precioG = 15000;
+    } else if (cuentaG === "NETFLIX CELULAR/PC") {
+        precioG = 12000;
+    } else if (cuentaG === "PLEX") {
+        precioG = 8000;
+    } else if (cuentaG === "PLEX 2") {
+        precioG = 14000;
+    } else if (cuentaG === "PLEX 4") {
+        precioG = 20000;
+    } else if (cuentaG === "IPTV") {
+        precioG = 12000;
+    } else {
+        precioG = 6000;
+    }
+
+    const texto = `${PerfilG}\t${whatasappG}\t${fechaG}\t${cuentaG}\t${correoG}\t"=+BUSCARV([@CORREO],'HOJA OCULTA CON TODOS LOS CORRE'!C:D,2,FALSO)"\t${precioG}`;
     navigator.clipboard.writeText(texto)
         .then(() => {
             //alert("Texto copiado al portapapeles: " + texto);
@@ -132,6 +221,7 @@ function copiarexcel() {
         .catch(err => {
             alert("Error al copiar al portapapeles: " + err.message);
         });
+    
 }
 
 function abrirCuentaDesdeBoton() {
@@ -318,7 +408,8 @@ function cambioContra() {
             const mensaje = `Hola, te informo que la contraseña de ${cuenta} cambió.\n\n` +
                             `*${cuenta.toUpperCase()} ${nombre.toUpperCase()}*\n` +
                             `*Correo:* ${correo}\n` +
-                            `*Contraseña:* ${contraseña}`;
+                            `*Contraseña:* ${contraseña}\n\n`+
+                            `*No necesariamente significa que se te cerro sesion, se envia para que siempre tengas la ultima contraseña*`;
 
             // Crear el enlace de WhatsApp sin el símbolo "+"
             const enlaceWhatsApp = `https://wa.me/${telefonoSinPlus}?text=${encodeURIComponent(mensaje)}`;
