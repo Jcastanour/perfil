@@ -53,6 +53,7 @@ let whatasappG;
 let nump;
 let cuentaG;
 let correoG;
+let contraG;
 function generarPlantilla() {
     navigator.clipboard.readText()
         .then(text => {
@@ -75,6 +76,7 @@ function generarPlantilla() {
             fechaG = fecha;
             cuentaG = cuenta;
             correoG = correo;
+            contraG = contrasena;
             whatasappG = "";
             navigator.clipboard.writeText(plantilla)
                 .then(() => {
@@ -107,6 +109,7 @@ function generarPlantilla2() {
             fechaG = fecha;
             cuentaG = cuenta;
             correoG = correo;
+            contraG = contrasena;
             whatasappG = whatasapp;
             navigator.clipboard.writeText(plantilla)
                 .then(() => {
@@ -177,9 +180,7 @@ function copiarcuenta() {
         alert("Primero debes generar la plantilla.");
         return;
     }
-
-    const [, correo, contrasena] = contenidoGenerado;
-    const texto = `${correo}\t${contrasena}`;
+    const texto = `${correoG}\t${contraG}`;
     navigator.clipboard.writeText(texto)
         .then(() => {
             //alert("Texto copiado al portapapeles: " + texto);
@@ -232,7 +233,7 @@ function abrirCuentaDesdeBoton() {
 
     copiarcuenta()
 
-    const [tipoCuenta] = contenidoGenerado;
+    const tipoCuenta = cuentaG;
     let url;
     switch (tipoCuenta.toLowerCase()) {
         case 'max':
@@ -256,16 +257,16 @@ function abrirCuentaDesdeBoton() {
         case 'paramount':
             url = 'https://paramountplus.com';
             break;
-        case 'NETFLIX EXTRA':
+        case 'netflix extra':
             url = 'https://netflix.com';
             break;
-        case 'NETFLIX TELEVISOR':
+        case 'netflix televisor':
             url = 'https://netflix.com';
             break;
-        case 'NETFLIX CELULAR/PC':
+        case 'netflix celular/pc':
             url = 'https://netflix.com';
             break;
-        case 'NETFLIX':
+        case 'netflix':
             url = 'https://netflix.com';
             break;    
         default:
