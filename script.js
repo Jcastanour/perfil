@@ -432,3 +432,61 @@ function cambioContra() {
         console.error('Error:', err);
     });
 }
+
+function cambioCorreo() {
+    // Obtener la fecha actual en formato YYYY-MM-DD
+    const fechaActual = obtenerFechaFormateada();
+
+    // Obtener el texto del portapapeles
+    navigator.clipboard.readText().then(text => {
+        // Dividir el texto del portapapeles en filas
+        const contenido = text.trim().split('\t');
+        const filas = text.trim().split('\n'); 
+        if ((contenido.length !== 6) & (contenido.length + (filas.length-1)) % 6 !== 0){
+                alert("El contenido copiado no está en el formato esperado (deben ser filas de 6 celdas).");
+                return;
+        } 
+
+        // Array para almacenar los enlaces de WhatsApp con el perfil y el nombre
+        const enlacesConPerfil = [];
+
+        // Iterar sobre cada fila y generar un enlace de WhatsApp para cada una
+        for (let i = 0; i < filas.length; i++) {
+            const fila = filas[i].split('\t'); // Dividir la fila en elementos separados por tabuladores
+
+            // Obtener los valores relevantes
+            // const perfil = fila[2];
+            const nombre = fila[0];
+            const cuenta = fila[3];
+            const correo = fila[4];
+            const contraseña = fila[5];
+            const telefono = fila[1].replace(/\s+/g, ''); // Eliminar espacios en blanco del número de teléfono
+            const telefonoSinPlus = telefono.replace(/^\+/, ''); // Eliminar el símbolo "+" del número de teléfono si está presente
+
+            // Formatear el mensaje de cambio de contraseña con el perfil y el nombre en negrita
+            const mensaje = `Hola, previniendo un problema con netflix se hara un cambio de ${cuenta}.\n\n` +
+                            `*${cuenta.toUpperCase()} ${nombre.toUpperCase()}*\n` +
+                            `*Correo:* ${correo}\n` +
+                            `*Contraseña:* ${contraseña}\n\n`+
+                            `*Si se te llega a cerrar sesion, ingresa de nuevo con esta porfa.*`;
+
+            // Crear el enlace de WhatsApp sin el símbolo "+"
+            const enlaceWhatsApp = `https://wa.me/${telefonoSinPlus}?text=${encodeURIComponent(mensaje)}`;
+
+            // Almacenar el enlace junto con el perfil y el nombre
+            enlacesConPerfil.push(`*Perfil: ${cuenta.toUpperCase()} ${nombre.toUpperCase()}*\n${enlaceWhatsApp}`);
+        }
+
+        // Concatenar el mensaje de cambio de contraseña al principio de la cadena de enlaces
+        const mensajeCambio = `*Cambio Correo - cuenta - ${filas[0].split('\t')[3]}*\n` +
+                            `${filas[0].split('\t')[4]}\n` + `*Fecha del cambio:* ${fechaActual}\n\n`;
+        const enlacesConPerfilTexto = mensajeCambio + enlacesConPerfil.join('\n\n');
+        
+        // Copiar los enlaces al portapapeles
+        return navigator.clipboard.writeText(enlacesConPerfilTexto);
+    }).then(() => {
+        console.log('Los enlaces de WhatsApp con el mensaje de cambio de contraseña se han copiado correctamente al portapapeles.');
+    }).catch(err => {
+        console.error('Error:', err);
+    });
+}
