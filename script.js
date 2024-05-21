@@ -464,11 +464,11 @@ function cambioCorreo() {
             const telefonoSinPlus = telefono.replace(/^\+/, ''); // Eliminar el símbolo "+" del número de teléfono si está presente
 
             // Formatear el mensaje de cambio de contraseña con el perfil y el nombre en negrita
-            const mensaje = `Hola, previniendo un problema con netflix se hara un cambio de ${cuenta}.\n\n` +
+            const mensaje = `Hola, previniendo un problema con ${cuenta} se hara un cambio de cuenta.\n\n` +
                             `*${cuenta.toUpperCase()} ${nombre.toUpperCase()}*\n` +
                             `*Correo:* ${correo}\n` +
                             `*Contraseña:* ${contraseña}\n\n`+
-                            `*Si se te llega a cerrar sesion, ingresa de nuevo con esta porfa.*`;
+                            `*Si se te llega a cerrar sesión, ingresa de nuevo con esta cuenta porfa.*`;
 
             // Crear el enlace de WhatsApp sin el símbolo "+"
             const enlaceWhatsApp = `https://wa.me/${telefonoSinPlus}?text=${encodeURIComponent(mensaje)}`;
