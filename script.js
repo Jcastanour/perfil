@@ -22,8 +22,10 @@ function actualizarContenidoCopiado() {
                 }else if (contenido.length >= 6) { // Si hay 6 o más celdas
                     if ((contenido.length + (filas.length-1))% 6 === 0) { // Si el número de celdas es múltiplo de 6
                         contenidoVisualizado = `<p>${filas.length} fila(s) copiada(s).</p>`;
-                    } else { // Si el número de celdas no es múltiplo de 6
-                        contenidoVisualizado = `<p>Atención: El número de celdas copiadas (${contenido.length}) no es un múltiplo de 6, por lo tanto, no se puede formar un número entero de filas.</p>`;
+                    } else if (contenido.length === 7){
+                        contenidoVisualizado = `<p>(${contenido.length}) Celdas para pegar en excel</p>`
+                    }else { // Si el número de celdas es mayor a 7 celdas
+                        contenidoVisualizado = `<p>Atención: El número de celdas copiadas (${contenido.length}) no funciona en ningun caso.</p>`;
                     }}
             } else if (text.includes('*')) { // Si el texto contiene asteriscos, aplicar formato especial
                 const contenido = text.trim().split('\n');
@@ -70,7 +72,10 @@ function generarPlantilla() {
             contenidoGenerado = contenido;
             nump = 0;
             const perfil = document.getElementById('perfil').value.trim();
-            const plantilla = `*${cuenta}*\n*Correo:* ${correo}\n*Contrasena:* ${contrasena}\n\n*Perfil:* ${perfil}\n*Fecha:* ${fecha}`;
+            let plantilla = `*${cuenta}*\n*Correo:* ${correo}\n*Contrasena:* ${contrasena}\n\n*Perfil:* ${perfil}\n*Fecha:* ${fecha}`;
+            if (cuenta === 'NETFLIX EXTRA'){
+                plantilla = `*NETFLIX TV PERSONAL*\n*Correo:* \n\n*Fecha:* ${fecha}`;
+            }
             PerfilG = perfil;
             plantillaG = plantilla;
             fechaG = fecha;
@@ -103,7 +108,10 @@ function generarPlantilla2() {
             const [perfil,whatasapp,cuenta, correo, contrasena] = contenido;
             contenidoGenerado = contenido;
             nump = 1;
-            const plantilla = `*${cuenta}*\n*Correo:* ${correo}\n*Contrasena:* ${contrasena}\n\n*Perfil:* ${perfil}\n*Fecha:* ${fecha}`;
+            let plantilla = `*${cuenta}*\n*Correo:* ${correo}\n*Contrasena:* ${contrasena}\n\n*Perfil:* ${perfil}\n*Fecha:* ${fecha}`;
+            if (cuenta === 'NETFLIX EXTRA'){
+                plantilla = `*NETFLIX TV PERSONAL*\n*Correo:* \n\n*Fecha:* ${fecha}`;
+            }
             PerfilG = perfil;
             plantillaG = plantilla;
             fechaG = fecha;
@@ -199,6 +207,8 @@ function copiarexcel() {
     let precioG;
     
     if (cuentaG === "NETFLIX TELEVISOR") {
+        precioG = 15000;
+    } else if (cuentaG === "NETFLIX EXTRA") {
         precioG = 15000;
     } else if (cuentaG === "NETFLIX CELULAR/PC") {
         precioG = 12000;
