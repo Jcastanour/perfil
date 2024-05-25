@@ -78,7 +78,7 @@ function generarPlantilla() {
             }
 
             if (cuenta === 'COMBO PLUS'){
-                plantilla = `*COMBO PLUS (DISNEY + STAR)*\n*Correo:* \n\n*Fecha:* ${fecha}`;
+                plantilla = `*COMBO PLUS (DISNEY + STAR)*\n*Correo:* ${correo}\n*Contrasena:* ${contrasena}\n\n*Perfil:* ${perfil}\n*Fecha:* ${fecha}`;
             }
 
             PerfilG = perfil;
@@ -119,7 +119,7 @@ function generarPlantilla2() {
             }
 
             if (cuenta === 'COMBO PLUS'){
-                plantilla = `*COMBO PLUS (DISNEY + STAR)*\n*Correo:* \n\n*Fecha:* ${fecha}`;
+                plantilla = `*COMBO PLUS (DISNEY + STAR)*\n*Correo:* ${correo}\n*Contrasena:* ${contrasena}\n\n*Perfil:* ${perfil}\n*Fecha:* ${fecha}`;
             }
             
             PerfilG = perfil;
