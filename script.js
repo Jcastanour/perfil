@@ -76,6 +76,11 @@ function generarPlantilla() {
             if (cuenta === 'NETFLIX EXTRA'){
                 plantilla = `*NETFLIX TV PERSONAL*\n*Correo:* \n\n*Fecha:* ${fecha}`;
             }
+
+            if (cuenta === 'COMBO PLUS'){
+                plantilla = `*COMBO PLUS (DISNEY + STAR)*\n*Correo:* \n\n*Fecha:* ${fecha}`;
+            }
+
             PerfilG = perfil;
             plantillaG = plantilla;
             fechaG = fecha;
@@ -112,6 +117,11 @@ function generarPlantilla2() {
             if (cuenta === 'NETFLIX EXTRA'){
                 plantilla = `*NETFLIX TV PERSONAL*\n*Correo:* \n\n*Fecha:* ${fecha}`;
             }
+
+            if (cuenta === 'COMBO PLUS'){
+                plantilla = `*COMBO PLUS (DISNEY + STAR)*\n*Correo:* \n\n*Fecha:* ${fecha}`;
+            }
+            
             PerfilG = perfil;
             plantillaG = plantilla;
             fechaG = fecha;
