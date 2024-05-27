@@ -110,7 +110,7 @@ function generarPlantilla2() {
             const fecha = obtenerFechaFormateada();
             const partesFecha = fecha.split('/');
             const fechaReorganizada = `${partesFecha[1]}/${partesFecha[0]}/${partesFecha[2]}`;
-            const [perfil,whatasapp,cuenta, correo, contrasena] = contenido;
+            const [perfil,whatasapp,cuenta, correo, contrasena] = contenido;    
             contenidoGenerado = contenido;
             nump = 1;
             let plantilla = `*${cuenta}*\n*Correo:* ${correo}\n*Contrasena:* ${contrasena}\n\n*Perfil:* ${perfil}\n*Fecha:* ${fecha}`;
@@ -230,6 +230,8 @@ function copiarexcel() {
         precioG = 20000;
     } else if (cuentaG === "IPTV") {
         precioG = 12000;
+    }   else if (cuentaG === "COMBO PLUS") {
+        precioG = 11000;
     } else {
         precioG = 6000;
     }
