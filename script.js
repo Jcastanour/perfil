@@ -327,6 +327,10 @@ function recordarDatos() {
                 perfil = "NETFLIX TELEVISOR";
             }
 
+            if (perfil === "COMBO PLUS") {
+                perfil = "COMBO PLUS (DISNEY + STAR)";
+            }
+
             // Formatear la salida de esta fila
             return `*${perfil.toUpperCase()} ${nombre.toUpperCase()}*\n` +
                 `*Correo:* ${correo}\n` +
