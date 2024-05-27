@@ -526,8 +526,8 @@ function cambioDisney() {
         // Dividir el texto del portapapeles en filas
         const contenido = text.trim().split('\t');
         const filas = text.trim().split('\n'); 
-        if ((contenido.length !== 6) & (contenido.length + (filas.length-1)) % 6 !== 0){
-                alert("El contenido copiado no está en el formato esperado (deben ser filas de 6 celdas).");
+        if ((contenido.length !== 9) & (contenido.length + (filas.length-1)) % 9 !== 0){
+                alert("El contenido copiado no está en el formato esperado (deben ser filas de 9 celdas).");
                 return;
         } 
 
@@ -544,22 +544,30 @@ function cambioDisney() {
             const cuenta = fila[3];
             const correo = fila[4];
             const contraseña = fila[5];
+            const costo = parseInt(fila[6].replace("$", "").replace(",", ""), 10);
+            const dias = fila[8];
             const telefono = fila[1].replace(/\s+/g, ''); // Eliminar espacios en blanco del número de teléfono
             const telefonoSinPlus = telefono.replace(/^\+/, ''); // Eliminar el símbolo "+" del número de teléfono si está presente
 
+            console.log(costo,dias);
+            let saldo = Math.ceil(costo/30) * dias;
+            console.log(saldo);
             // Formatear el mensaje de cambio de contraseña con el perfil y el nombre en negrita
             const mensaje = `Hola,
 
 Debido a que el día 26 de junio Star se unirá a Disney, quedando en una sola app, se dejó de vender Disney y Star por separado.
 
-Tu cuenta de ${cuenta} se tendrá que cerrar el día de mañana. Para ofrecerte una solución óptima, tenemos 3 alternativas:
+Tu cuenta de ${cuenta} se tendrá que cerrar el día de mañana.
+Para ofrecerte una solución óptima, tenemos 3 alternativas:
 
-1. Devolución del dinero de los días restantes de tu cuenta de ${cuenta}.
-2. Usar el dinero restante como saldo y tu completar para comprar la cuenta en Combo Plus (Disney + Star).
-3. Cambiarte a otra cuenta de ${cuenta} que esté disponible (puede estar sujeta a varios cambios en el mes). Ten en cuenta que si te envío otra cuenta que esté disponible, en la próxima renovación ya sí se tendra que cerrar.
+1. Devolución del dinero de los días restantes (${dias} días = $${saldo}) de tu cuenta de ${cuenta}.
+2. Tu completas el restante para comprar la cuenta en Combo Plus (Disney + Star). 
+Restante = ($${Math.round((((11000 - costo)/30)/100)* dias)*100}). Este restante se esta calculando para quedar el mismo día de la ${cuenta}.
+3. Cambiarte a otra cuenta de ${cuenta} que esté disponible (puede estar sujeta a varios cambios en el mes). Ten en cuenta que si te envío otra cuenta que esté disponible, en la próxima renovación ya sí se tendrá que cerrar.
 
-Todo esto se hace para garantizar un servicio óptimo y renovación, y así el 26 de junio no sea un problema.
-`;
+Todo esto se hace para garantizar un óptimo servicio y poder renovar el proximo mes. 
+Así podemos garantizasrte que el 26 de junio no sea un problema y puedas continuar como si nada.
+`
 ;
 
             // Crear el enlace de WhatsApp sin el símbolo "+"
@@ -570,7 +578,7 @@ Todo esto se hace para garantizar un servicio óptimo y renovación, y así el 2
         }
 
         // Concatenar el mensaje de cambio de contraseña al principio de la cadena de enlaces
-        const mensajeCambio = `*Cambio Correo - cuenta - ${filas[0].split('\t')[3]}*\n` +
+        const mensajeCambio = `*Cambio Disney/Star - ${filas[0].split('\t')[3]}*\n` +
                             `${filas[0].split('\t')[4]}\n` + `*Fecha del cambio:* ${fechaActual}\n\n`;
         const enlacesConPerfilTexto = mensajeCambio + enlacesConPerfil.join('\n\n');
         
