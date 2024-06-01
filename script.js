@@ -545,28 +545,34 @@ function cambioDisney() {
             const correo = fila[4];
             const contraseña = fila[5];
             const costo = parseInt(fila[6].replace("$", "").replace(",", ""), 10);
-            const dias = fila[8];
+            const dias = Math.max(fila[8],0);
             const telefono = fila[1].replace(/\s+/g, ''); // Eliminar espacios en blanco del número de teléfono
             const telefonoSinPlus = telefono.replace(/^\+/, ''); // Eliminar el símbolo "+" del número de teléfono si está presente
+            let restante = Math.round((((11000 - costo)/30)/100)* dias)*100
+
+            if (restante <= 0){
+                restante = 11000;
+            }
 
             console.log(costo,dias);
-            let saldo = Math.ceil(costo/30) * dias;
+            let saldo = Math.max(Math.ceil(costo/30) * dias,0);
             console.log(saldo);
             // Formatear el mensaje de cambio de contraseña con el perfil y el nombre en negrita
             const mensaje = `Hola,
 
 Debido a que el día 26 de junio Star se unirá a Disney, quedando en una sola app, se dejó de vender Disney y Star por separado.
 
-Tu cuenta de ${cuenta} se tendrá que cerrar el día de mañana.
-Para ofrecerte una solución óptima, tenemos 3 alternativas:
+Tu cuenta de ${cuenta} perfil: ${nombre} se tendrá que cerrar el día de mañana.
+Para ofrecerte una solución óptima, tenemos 4 alternativas:
 
-1. Devolución del dinero de los días restantes (${dias} días = $${saldo}) de tu cuenta de ${cuenta}.
-2. Tu completas el restante para comprar la cuenta en Combo Plus (Disney + Star). 
-Restante = ($${Math.round((((11000 - costo)/30)/100)* dias)*100}). Este restante se esta calculando para quedar el mismo día de la ${cuenta}.
-3. Cambiarte a otra cuenta de ${cuenta} que esté disponible (puede estar sujeta a varios cambios en el mes). Ten en cuenta que si te envío otra cuenta que esté disponible, en la próxima renovación ya sí se tendrá que cerrar.
+1. Si tu ya cuentas con disney y star pero en diferentes cuentas o fechas, simplemente se juntarían para quedar con una cuenta para ambas plataformas (En Combo plus).
+2. Devolución del dinero de los días restantes (${dias} días = $${saldo}) de tu cuenta de ${cuenta}.
+3. Tu completas el restante para comprar la cuenta en Combo Plus (Disney + Star). 
+Restante = ($${restante}).
+4. Cambiarte a otra cuenta de ${cuenta} que esté disponible (puede estar sujeta a varios cambios en el mes). Ten en cuenta que si te envío otra cuenta que esté disponible, en la próxima renovación ya sí se tendrá que cerrar.
 
 Todo esto se hace para garantizar un óptimo servicio y poder renovar el proximo mes. 
-Así podemos garantizasrte que el 26 de junio no sea un problema y puedas continuar como si nada.
+Así podemos garantizarte que el 26 de junio no sea un problema y puedas continuar como si nada.
 `
 ;
 
