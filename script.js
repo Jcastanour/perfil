@@ -562,13 +562,13 @@ function cambioDisney() {
 
 Debido a que el día 26 de junio Star se unirá a Disney, quedando en una sola app, se dejó de vender Disney y Star por separado.
 
-Tu cuenta de ${cuenta} perfil: ${nombre} se tendrá que cerrar el día de mañana.
+Tu cuenta de ${cuenta} perfil: ${nombre} se cerrará en los próximos días.
 Para ofrecerte una solución óptima, tenemos 4 alternativas:
 
 1. Si tu ya cuentas con disney y star pero en diferentes cuentas o fechas, simplemente se juntarían para quedar con una cuenta para ambas plataformas (En Combo plus).
 2. Devolución del dinero de los días restantes (${dias} días = $${saldo}) de tu cuenta de ${cuenta}.
 3. Tu completas el restante para comprar la cuenta en Combo Plus (Disney + Star). 
-Restante = ($${restante}).
+Restante = ($${restante}). Esta precio es el equivalente a ${dias} días.
 4. Cambiarte a otra cuenta de ${cuenta} que esté disponible (puede estar sujeta a varios cambios en el mes). Ten en cuenta que si te envío otra cuenta que esté disponible, en la próxima renovación ya sí se tendrá que cerrar.
 
 Todo esto se hace para garantizar un óptimo servicio y poder renovar el proximo mes. 
