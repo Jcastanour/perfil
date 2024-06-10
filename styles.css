@@ -14,8 +14,8 @@ body{
 }
 
 .wrapper{
-    width: 500px;
-    height: 450px;;
+    width: 700px;
+    height: 550px;;
     transition: box-shadow 0.3s ease;
     text-align: center;
     justify-content: center;
