@@ -48,6 +48,16 @@ button{
     
 }
 
+#importante{
+    background: rgb(205, 28, 28);
+    color: #ffffff; 
+}
+
+#importante2{
+    background: rgb(237, 186, 0);
+    color: #000000;
+}
+
 button:hover {
 background: rgb(54, 68, 255);
 transform: scale(1.02);
@@ -104,3 +114,5 @@ button {
 .lista div:last-child {
     border-right: 0;
 }
+
+
