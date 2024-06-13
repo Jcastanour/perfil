@@ -10,28 +10,33 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+
     <div class="wrapper">
+        <header>
+            <img src="Logo.png" />
+        <h1>ELIXIR CUENTAS</h1> 
+        </header>
+        
         <div class = "contenedor-botones">
-        <input type="text" id="perfil" placeholder="Perfil">
-        <button id="importante" onclick="generarPlantilla()">Generar Plantilla (3)</button>
+        <input type="text" class="tres" id="perfil" placeholder="Perfil">
+        <button class="tres" onclick="generarPlantilla()">Generar Plantilla</button>
         </div>
         <div id="contenido-copiado" class="container">
         </div>
-        <div>
-            <button id="importante" onclick="generarPlantilla2()">Generar Plantilla con numero (5)</button>
-            <button id="importante2" onclick="copiarexcel()">Copiar Excel</button>
-            <button onclick="copiarcuenta()">Copiar Cuenta</button>
-            <button onclick="plantilladenuevo()">Plantilla Pasada</button>
-            <button onclick="abrirCuentaDesdeBoton()">Abrir Pagina</button>
-            <button onclick="recordarDatos()">Recordar datos</button>
-            <button onclick="cambioCorreo()">Cambio correo</button>
-            <button onclick="cambioContra()">Cambio contraseña</button>
-            <button onclick="cambioDisney()">Cambio Disney/Star</button>
-            <button onclick="obtenerNombresYSumaPrecios()">Nombres y precios</button>
-            <button onclick="procesarFecha()">Contacto</button>
-            <button onclick="cambioDisney2()">Calcular Disney/star unitario</button> 
-
-        </div>
+        <div class = "botones">
+            <button id="generarconcinco" onclick="generarPlantilla2()">Generar Plantilla</button>
+            <button id="nombresyprecios"onclick="obtenerNombresYSumaPrecios()">Nombres y precios</button>
+            <button id="copiarexcel" onclick="copiarexcel()">Copiar Excel</button>
+            <button id="copiarcuenta" onclick="copiarcuenta()">Copiar Cuenta</button>
+            <button id="abrirpagina" onclick="abrirCuentaDesdeBoton()">Abrir Pagina</button>
+            <button id="plantilladenuevo" onclick="plantilladenuevo()">Plantilla Pasada</button>
+            <button id="contacto" onclick="procesarFecha()">Contacto</button>
+            <button id="recordardatos" onclick="recordarDatos()">Recordar datos</button>
+            <button id="disneystarunitario" onclick="cambioDisney2()">Calcular Disney/star unitario</button> 
+            <button id="cambiocorreo" onclick="cambioCorreo()">Cambio correo</button>
+            <button id="cambiocontra" onclick="cambioContra()">Cambio contraseña</button>
+            <button id="cambiodisney" onclick="cambioDisney()">Cambio Disney/Star</button>
+            </div>
     </div>
     
     <script src="script.js"></script>
