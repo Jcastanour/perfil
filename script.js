@@ -74,17 +74,26 @@ function actualizarContenidoCopiado() {
                 const contenido = text.trim().split('\t');
 
                 if (contenido.length <= 3) { // Si hay 3 celdas, mostrarlas como lista
-                    contenidoVisualizado = `<p>${contenido.length} celda(s) copiada(s).</p>`;
+                    contenidoVisualizado = `<p>${contenido.length} celdas copiadas.</p>`;
                     contenidoVisualizado += '<div class="lista">';
                     contenido.forEach(item => {
                         contenidoVisualizado += `<div>${item}</div>`;
                     });
                     contenidoVisualizado += '</div>';
-                } else if ((contenido.length > 1 & contenido.length < 6)){
-                    contenidoVisualizado = `<p>${contenido.length} celda(s) copiada(s).</p>`;    
-                }else if (contenido.length >= 6) { // Si hay 6 o más celdas
+                } else if ((contenido.length > 1 & contenido.length < 4)){
+                    contenidoVisualizado = `<p>${contenido.length} celdas copiadas.</p>`;   
+                } else if ((contenido.length + (filas.length-1))% 4 === 0 && (contenido.length + (filas.length-1))/4 === (filas.length)){
+                    if (contenido.length === 4){
+                        contenidoVisualizado = `<p>${contenido.length} celdas copiadas.</p>`;
+                    }else {
+                        contenidoVisualizado = `<p>${filas.length} filas de 4 celdas.</p>`;
+                    }
+                }else if (contenido.length ===5){
+                    contenidoVisualizado = `<p>${contenido.length} celdas copiadas.</p>`;
+                }
+                else if (contenido.length >= 6) { // Si hay 6 o más celdas
                     if ((contenido.length + (filas.length-1))% 6 === 0) { // Si el número de celdas es múltiplo de 6
-                        contenidoVisualizado = `<p>${filas.length} fila(s) copiada(s) de 6 celdas.</p>`;
+                        contenidoVisualizado = `<p>${filas.length} filas de 6 celdas.</p>`;
                     } else if (contenido.length === 7){
                         contenidoVisualizado = `<p>(${contenido.length}) Celdas para pegar en excel</p>`
                     }else { // Si el número de celdas es mayor a 7 celdas
@@ -98,7 +107,7 @@ function actualizarContenidoCopiado() {
                 });
                 // actualizarBotones('*',0);
             } else { // Si no se cumple ninguna condición, mostrar el texto sin formato especial
-                contenidoVisualizado = text;
+                contenidoVisualizado = `<p>${text}</p>`;
             }
             
             document.getElementById('contenido-copiado').innerHTML = contenidoVisualizado;
