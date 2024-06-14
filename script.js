@@ -364,6 +364,10 @@ function abrirCuentaDesdeBoton() {
         case 'netflix celular/pc':
             url = 'https://netflix.com';
             break;
+        case 'combo plus':
+            window.open('https://disneyplus.com', '_blank')
+            window.open('https://starplus.com', '_blank')
+            return
         case 'netflix':
             url = 'https://netflix.com';
             break;    
