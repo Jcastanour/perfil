@@ -41,6 +41,12 @@ function actualizarBotones() {
         document.getElementById("nombresyprecios").style.display = "inline";
       } else if (contenidoG === 5) {
         document.getElementById("generarconcinco").style.display = "inline";
+      } else if (
+        contenidoG > 5 &&
+        (contenidoG + (filasG - 1)) % 5 === 0 &&
+        (contenidoG + (filasG - 1)) / 5 === filasG
+      ) {
+        document.getElementById("generarcombo").style.display = "inline";
       } else if (contenidoG === 6) {
         document.getElementById("cambiocorreou").style.display = "inline";
         document.getElementById("cambiocontrau").style.display = "inline";
@@ -103,6 +109,12 @@ function actualizarContenidoCopiado() {
           }
         } else if (contenido.length === 5) {
           contenidoVisualizado = `<p>${contenido.length} celdas copiadas.</p>`;
+        } else if (
+          contenido.length > 5 &&
+          (contenido.length + (filas.length - 1)) % 5 === 0 &&
+          (contenido.length + (filas.length - 1)) / 5 === filas.length
+        ) {
+          contenidoVisualizado = `<p>${filas.length} filas de 5 celdas.</p>`;
         } else if (contenido.length >= 6) {
           // Si hay 6 o más celdas
           if ((contenido.length + (filas.length - 1)) % 6 === 0) {
@@ -789,6 +801,72 @@ function cambioCorreou() {
     .then(() => {
       console.log(
         "Los enlaces de WhatsApp con el mensaje de cambio de contraseña se han copiado correctamente al portapapeles."
+      );
+    })
+    .catch((err) => {
+      console.error("Error:", err);
+    });
+}
+
+function generarCombo() {
+  // Obtener el texto del portapapeles
+  navigator.clipboard
+    .readText()
+    .then((text) => {
+      // Dividir la cadena en elementos separados por tabuladores
+      const filas = text.trim().split("\n");
+
+      // Verificar el formato esperado
+      const contenido = text.trim().split("\t");
+      if (
+        contenido.length !== 5 &&
+        (contenido.length + (filas.length - 1)) % 5 !== 0
+      ) {
+        alert(
+          "El contenido copiado no está en el formato esperado (deben ser filas de 6 celdas)."
+        );
+        return;
+      }
+
+      // Procesar cada fila
+      let fechaActual = obtenerFechaFormateada();
+      const salidaFormateada =
+        filas
+          .map((fila) => {
+            // Dividir la fila en elementos separados por tabuladores
+            const datos = fila.split("\t");
+
+            // Obtener los valores relevantes
+            let perfil = datos[2];
+            let whatasapp = datos[1];
+            const nombre = datos[0];
+            const correo = datos[3];
+            const contraseña = datos[4];
+
+            // Reemplazar "NETFLIX EXTRA" con "NETFLIX TELEVISOR"
+            if (perfil === "NETFLIX EXTRA") {
+              perfil = "NETFLIX TELEVISOR";
+            }
+
+            if (perfil === "COMBO PLUS") {
+              perfil = "COMBO PLUS (DISNEY + STAR)";
+            }
+
+            // Formatear la salida de esta fila
+            return (
+              `*${perfil.toUpperCase()} ${nombre.toUpperCase()}*\n` +
+              `*Correo:* ${correo}\n` +
+              `*Contraseña:* ${contraseña}`
+            );
+          })
+          .join("\n\n") + `\n\n*Fecha de venta:* ${fechaActual}`; // Unir las salidas de cada fila separadas por dos saltos de línea
+
+      // Colocar la salida formateada en el portapapeles
+      return navigator.clipboard.writeText(salidaFormateada);
+    })
+    .then(() => {
+      console.log(
+        "La salida formateada se ha copiado correctamente al portapapeles."
       );
     })
     .catch((err) => {
