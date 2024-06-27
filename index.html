@@ -1,44 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Generador de Plantillas</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body>
     <div class="wrapper">
-        <header>
-            <img src="Logo.png" />
-        <h1>ELIXIR CUENTAS</h1> 
-        </header>
-        
-        <div class = "contenedor-botones">
-        <input type="text" class="tres" id="perfil" placeholder="Perfil">
-        <button class="tres" onclick="generarPlantilla()">Generar Plantilla</button>
-        </div>
-        <div id="contenido-copiado" class="container">
-        </div>
-        <div class = "botones">
-            <button id="generarconcinco" onclick="generarPlantilla2()">Generar Plantilla</button>
-            <button id="nombresyprecios"onclick="obtenerNombresYSumaPrecios()">Nombres y precios</button>
-            <button id="copiarexcel" onclick="copiarexcel()">Copiar Excel</button>
-            <button id="copiarcuenta" onclick="copiarcuenta()">Copiar Cuenta</button>
-            <button id="abrirpagina" onclick="abrirCuentaDesdeBoton()">Abrir Pagina</button>
-            <button id="plantilladenuevo" onclick="plantilladenuevo()">Plantilla Pasada</button>
-            <button id="contacto" onclick="procesarFecha()">Contacto</button>
-            <button id="recordardatos" onclick="recordarDatos()">Recordar datos</button>
-            <button id="disneystarunitario" onclick="cambioDisney2()">Calcular Disney/star unitario</button> 
-            <button id="cambiocorreo" onclick="cambioCorreo()">Cambio correo</button>
-            <button id="cambiocontra" onclick="cambioContra()">Cambio contraseña</button>
-            <button id="cambiodisney" onclick="cambioDisney()">Cambio Disney/Star</button>
-            </div>
+      <header>
+        <img src="Logo.png" />
+        <h1>ELIXIR CUENTAS</h1>
+      </header>
+
+      <div class="contenedor-botones">
+        <input type="text" class="tres" id="perfil" placeholder="Perfil" />
+        <button class="tres" onclick="generarPlantilla()">
+          Generar Plantilla
+        </button>
+      </div>
+      <div id="contenido-copiado" class="container"></div>
+      <div class="botones">
+        <button id="generarconcinco" onclick="generarPlantilla2()">
+          Generar Plantilla
+        </button>
+        <button id="nombresyprecios" onclick="obtenerNombresYSumaPrecios()">
+          Nombres y precios
+        </button>
+        <button id="copiarexcel" onclick="copiarexcel()">Copiar Excel</button>
+        <button id="copiarcuenta" onclick="copiarcuenta()">
+          Copiar Cuenta
+        </button>
+        <button id="abrirpagina" onclick="abrirCuentaDesdeBoton()">
+          Abrir Pagina
+        </button>
+        <button id="plantilladenuevo" onclick="plantilladenuevo()">
+          Plantilla Pasada
+        </button>
+        <button id="contacto" onclick="procesarFecha()">Contacto</button>
+        <button id="recordardatos" onclick="recordarDatos()">
+          Recordar datos
+        </button>
+        <button id="cambiocorreo" onclick="cambioCorreo()">
+          Cambio correo
+        </button>
+        <button id="cambiocontra" onclick="cambioContra()">
+          Cambio contraseña
+        </button>
+        <button id="cambiocorreou" onclick="cambioCorreou()">
+          Cambio correo Unitario
+        </button>
+        <button id="cambiocontrau" onclick="cambioContrau()">
+          Cambio contraseña Unitario
+        </button>
+      </div>
     </div>
-    
+
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

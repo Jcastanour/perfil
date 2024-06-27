@@ -1,147 +1,129 @@
-html{
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+html {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
-body{
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #efefef;
-    
+body {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #efefef;
 }
 
 header {
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #fff;
-    align-items: center;
-    padding: 10px 20px;
-    margin-bottom: 20px;
-    padding: 1rem 0 1rem 0;
-    overflow: auto;
-
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fff;
+  align-items: center;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  padding: 1rem 0 1rem 0;
+  overflow: auto;
 }
 header img {
-    width: 100px;
-    height: 100px;
-    margin-right: 15px;
+  width: 100px;
+  height: 100px;
+  margin-right: 15px;
 }
 header h1 {
-    font-size: 30px;
-    color: #333;
-    margin: 0;
+  font-size: 30px;
+  color: #333;
+  margin: 0;
 }
 
-.wrapper{
-    width: 600px;
-    height: auto;
-    transition: box-shadow 0.3s ease;
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #fff;
-    border-radius: 10px;
-    overflow: auto;
-
+.wrapper {
+  width: 600px;
+  height: auto;
+  transition: box-shadow 0.3s ease;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  overflow: auto;
 }
 
-.wrapper:hover{
-box-shadow: 0px 25px 35px rgba(0, 0, 0, 0.3);
+.wrapper:hover {
+  box-shadow: 0px 25px 35px rgba(0, 0, 0, 0.3);
 }
 
-button{
-    transition: transform 0.3s ease;
-    font-size: 1.1rem;
-    margin-top: 1rem;
-    border-radius: 5px;
-    outline: none;
-    border: none;
-    height: auto;
-    background: rgb(63, 76, 255);
-    color: #fff;
-    cursor: pointer;
-    padding: 15px 20px;
-    font-size: 20px;
-    white-space: nowrap;
+button {
+  transition: transform 0.3s ease;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  height: auto;
+  background: rgb(63, 76, 255);
+  color: #fff;
+  cursor: pointer;
+  padding: 15px 20px;
+  font-size: 20px;
+  white-space: nowrap;
 }
 
 button:hover {
-background: rgb(54, 68, 255);
-transform: scale(1.02);
+  background: rgb(54, 68, 255);
+  transform: scale(1.02);
 }
 
 input[type="text"] {
-    padding: 10px; /* Aumentar el padding para más espacio alrededor del texto */
-    font-size: 16px;
-    margin-bottom: 15px; /* Incrementar el margen inferior para separarlo visualmente del siguiente elemento */
-    text-align: center;
-    border: 2px solid #ccc; /* Agregar un borde para resaltar el input */
-    border-radius: 5px; /* Agregar bordes redondeados */
-    transition: border-color 0.3s ease; /* Transición suave para el cambio de color del borde */
+  padding: 10px; /* Aumentar el padding para más espacio alrededor del texto */
+  font-size: 16px;
+  margin-bottom: 15px; /* Incrementar el margen inferior para separarlo visualmente del siguiente elemento */
+  text-align: center;
+  border: 2px solid #ccc; /* Agregar un borde para resaltar el input */
+  border-radius: 5px; /* Agregar bordes redondeados */
+  transition: border-color 0.3s ease; /* Transición suave para el cambio de color del borde */
 }
 
 /* Estilo para cuando el input está enfocado */
 input[type="text"]:focus {
-    border-color: #63a2ff; /* Cambiar el color del borde al enfocar el input */
-    outline: none; /* Eliminar el contorno predeterminado al enfocar */
+  border-color: #63a2ff; /* Cambiar el color del borde al enfocar el input */
+  outline: none; /* Eliminar el contorno predeterminado al enfocar */
 }
 
-.contenedor-botones,
-#nombresyprecios,
-#generarconcinco,
-#copiarexcel,
-#copiarcuenta,
-#abrirpagina,
-#contacto,
-#recordardatos,
-#disneystarunitario,
-#cambiocorreo,
-#cambiocontra,
-#cambiodisney,
-#plantilladenuevo {
-    display: none;
+.contenedor-botones {
+  display: none;
 }
 
 .mensaje-container {
-    background-color: #DCF8C6; /* Color de fondo del mensaje */
-    border: 1px solid #ddd; /* Borde */
-    border-radius: 5px; /* Borde redondeado */
-    padding: 10px; /* Espaciado interno */
-    margin: 0 auto; /* Centrar horizontalmente */
-    max-width: 80%; /* Anchura máxima */
-    text-align: left; /* Alinear texto a la izquierda */
-    
+  background-color: #dcf8c6; /* Color de fondo del mensaje */
+  border: 1px solid #ddd; /* Borde */
+  border-radius: 5px; /* Borde redondeado */
+  padding: 10px; /* Espaciado interno */
+  margin: 0 auto; /* Centrar horizontalmente */
+  max-width: 80%; /* Anchura máxima */
+  text-align: left; /* Alinear texto a la izquierda */
 }
 
 .bold {
-    font-weight: bold; /* Hacer el texto en negrita */
+  font-weight: bold; /* Hacer el texto en negrita */
 }
 
 .lista {
-    display: table;
-    width: 100%;
-    border-collapse: collapse;
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .lista div {
-    display: table-cell;
-    padding: 5px 10px;
-    border: 1px solid #ddd;
+  display: table-cell;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
 }
 
 .lista div:first-child {
-    border-left: 100;
+  border-left: 100;
 }
 
 .lista div:last-child {
-    border-right: 100;
+  border-right: 100;
 }
-
-
