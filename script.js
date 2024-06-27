@@ -724,7 +724,7 @@ function cambioContrau() {
       const contraseña = fila[5];
       const telefono = fila[1].replace(/\s+/g, ""); // Eliminar espacios en blanco del número de teléfono
       const telefonoSinPlus = telefono.replace(/^\+/, ""); // Eliminar el símbolo "+" del número de teléfono si está presente
-      plantillabool = 0;
+      plantillabool = 2;
 
       // Formatear el mensaje de cambio de contraseña con el perfil y el nombre en negrita
       const mensaje =
@@ -774,7 +774,7 @@ function cambioCorreou() {
       const telefono = fila[1].replace(/\s+/g, ""); // Eliminar espacios en blanco del número de teléfono
       const telefonoSinPlus = telefono.replace(/^\+/, ""); // Eliminar el símbolo "+" del número de teléfono si está presente
 
-      plantillabool = 0;
+      plantillabool = 2;
       // Formatear el mensaje de cambio de contraseña con el perfil y el nombre en negrita
       const mensaje =
         `Hola, previniendo un problema con ${cuenta} se hara un cambio de cuenta.\n\n` +
