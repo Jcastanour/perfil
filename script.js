@@ -15,7 +15,7 @@ function actualizarBotones() {
       let contenidoG = 0;
       let menuatras = 0;
 
-      if (window.innerWidth > 600) {
+      if (window.innerWidth > 1100) {
         document.querySelectorAll(".botones button").forEach((button) => {
           button.style.display = "none";
         });
@@ -63,6 +63,7 @@ function actualizarBotones() {
         document.getElementById("recordardatos").style.display = "inline";
         document.getElementById("cambiocorreou").style.display = "inline";
         document.getElementById("cambiocontrau").style.display = "inline";
+        document.getElementById("generarconseis").style.display = "inline";
       } else if (
         contenidoG > 6 &&
         (contenidoG + (filasG - 1)) % 6 === 0 &&
