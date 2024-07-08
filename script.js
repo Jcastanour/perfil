@@ -275,6 +275,49 @@ function generarPlantilla2() {
     .catch((err) => console.error("Error al leer el portapapeles:", err));
 }
 
+function generarPlantilla3() {
+  navigator.clipboard
+    .readText()
+    .then((text) => {
+      const contenido = text.trim().split("\t");
+      if (contenido.length !== 6) {
+        alert(
+          "El contenido copiado no está en el formato esperado (deben ser seis columnas separadas por tabuladores)."
+        );
+        return;
+      }
+
+      const [perfil, whatasapp, fecha, cuenta, correo, contrasena] = contenido;
+      contenidoGenerado = contenido;
+      nump = 1;
+      let plantilla = `*${cuenta}*\n*Correo:* ${correo}\n*Contrasena:* ${contrasena}\n\n*Perfil:* ${perfil}\n*Fecha:* ${fecha}`;
+      if (cuenta === "NETFLIX EXTRA") {
+        plantilla = `*NETFLIX TV PERSONAL*\n*Correo:* \n\n*Fecha:* ${fecha}`;
+      }
+
+      if (cuenta === "COMBO PLUS") {
+        plantilla = `*COMBO PLUS (DISNEY + STAR)*\n*Correo:* ${correo}\n*Contrasena:* ${contrasena}\n\n*Perfil:* ${perfil}\n*Fecha:* ${fecha}`;
+      }
+
+      PerfilG = perfil;
+      plantillaG = plantilla;
+      fechaG = fecha;
+      cuentaG = cuenta;
+      correoG = correo;
+      contraG = contrasena;
+      whatasappG = whatasapp;
+      plantillabool = 1;
+      navigator.clipboard
+        .writeText(plantilla)
+        .then(() => {
+          // alert("La plantilla ha sido generada y copiada al portapapeles.");
+          document.getElementById("perfil").value = "";
+        })
+        .catch((err) => console.error("Error al copiar al portapapeles:", err));
+    })
+    .catch((err) => console.error("Error al leer el portapapeles:", err));
+}
+
 function procesarFecha() {
   // Obtener el nombre del perfil y la fecha
   var perfil = PerfilG;
