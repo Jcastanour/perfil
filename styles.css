@@ -127,3 +127,24 @@ input[type="text"]:focus {
 .lista div:last-child {
   border-right: 100;
 }
+
+/* Nuevos estilos para pantallas pequeñas */
+@media (max-width: 600px) {
+  .contenedor-botones {
+    display: block; /* Mostrar el contenedor de botones en pantallas pequeñas */
+  }
+  .botones button {
+    display: inline-block; /* Mostrar los botones en pantallas pequeñas */
+  }
+  .wrapper {
+    width: 100%; /* Ajustar el ancho del wrapper para pantallas pequeñas */
+    padding: 10px; /* Agregar padding para darle espacio interno */
+  }
+  header img {
+    width: 50px; /* Ajustar el tamaño de la imagen para pantallas pequeñas */
+    height: 50px;
+  }
+  header h1 {
+    font-size: 20px; /* Ajustar el tamaño de la fuente del encabezado para pantallas pequeñas */
+  }
+}

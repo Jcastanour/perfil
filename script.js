@@ -15,10 +15,22 @@ function actualizarBotones() {
       let contenidoG = 0;
       let menuatras = 0;
 
-      document.querySelectorAll(".botones button").forEach((button) => {
-        button.style.display = "none";
-      });
-      document.querySelector(".contenedor-botones").style.display = "none";
+      if (window.innerWidth > 600) {
+        document.querySelectorAll(".botones button").forEach((button) => {
+          button.style.display = "none";
+        });
+        document.querySelector(".contenedor-botones").style.display = "none";
+      } else {
+        document.querySelectorAll(".botones button").forEach((button) => {
+          button.style.display = "inline-block";
+        });
+        document.querySelector(".contenedor-botones").style.display = "block";
+      }
+
+      // document.querySelectorAll(".botones button").forEach((button) => {
+      //   button.style.display = "none";
+      // });
+      // document.querySelector(".contenedor-botones").style.display = "none";
 
       console.log(plantillabool);
       if (text.includes("\t")) {
